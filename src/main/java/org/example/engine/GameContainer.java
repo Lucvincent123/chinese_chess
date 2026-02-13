@@ -1,14 +1,15 @@
 package org.example.engine;
 
+import java.awt.Graphics;
+
 public class GameContainer implements Runnable {
     private boolean running = false;
     private Thread gameThread;
-    private final GameWindow window;
+    protected final GameWindow window;
     private final int TARGET_FPS;
     private final int TARGET_UPS;
     private int currentFPS = 0;
     private int currentUPS = 0;
-
 
     public GameContainer(GameWindow window, int targetFPS, int targetUPS) {
         this.window = window;
@@ -24,6 +25,7 @@ public class GameContainer implements Runnable {
         gameThread.start();
     }
 
+
     public void stop() {
         if (!running) return;
         running = false;
@@ -34,6 +36,7 @@ public class GameContainer implements Runnable {
         }
 
     }
+
     @Override
     public void run() {
         double timePerFrame = 1_000_000_000.0 / TARGET_FPS;
@@ -59,24 +62,25 @@ public class GameContainer implements Runnable {
 
             if (deltaU >= 1) {
                 // Here you would update your game logic, e.g. move objects, check collisions, etc.
+                update();
                 deltaU--;
                 updateCount++;
             }
 
             if (deltaF >= 1) {
-                // Render
-                window.render();
+                // Here you would render your game, e.g. draw objects on the screen.
+                render();
                 deltaF--;
                 frameCount++;
             }
 
-
-            if (System.currentTimeMillis() - lastTimeCheck >= 1_000) {
+            long now = System.currentTimeMillis();
+            if (now - lastTimeCheck >= 1_000) {
                 currentFPS = frameCount;
                 currentUPS = updateCount;
                 frameCount = 0;
                 updateCount = 0;
-                lastTimeCheck = System.currentTimeMillis();
+                lastTimeCheck = now;
                 System.out.println("FPS: " + currentFPS + " | UPS: " + currentUPS);
             }
     }
@@ -91,11 +95,13 @@ public class GameContainer implements Runnable {
         return currentUPS;
     }
 
-    public static void main(String[] args) {
-        GameWindow window = new GameWindow(800, 600);
-        window.setVisible(true);
-        GameContainer gameContainer = new GameContainer(window, 120, 200);
-        gameContainer.start();
+
+    protected void update() {
+        // Update game logic here
+    }
+
+    protected void render() {
 
     }
+
 }
