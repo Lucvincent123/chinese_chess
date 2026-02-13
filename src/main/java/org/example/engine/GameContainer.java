@@ -101,7 +101,7 @@ public class GameContainer implements Runnable {
     }
 
     protected void render() {
-
+        window.render();
     }
 
 }

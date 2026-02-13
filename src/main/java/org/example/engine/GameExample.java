@@ -2,12 +2,12 @@ package org.example.engine;
 
 import java.awt.Color;
 
-public class GameExample extends GameContainer{
-    private GameEntity rectangle;
+public class GameExample extends GameContainer {
+    private final GameRectangle rectangle;
 
     public GameExample(GameWindow window, int targetFPS, int targetUPS) {
         super(window, targetFPS, targetUPS);
-        rectangle = new GameEntity(100, 100, 50, 50, Color.BLUE);
+        rectangle = new GameRectangle(100, 100, 50, 50, Color.BLUE);
         window.getCanvas().addEntity(rectangle);
         KeyInput keyInput = new KeyInput(this);
         window.addKeyListener(keyInput);
@@ -27,7 +27,7 @@ public class GameExample extends GameContainer{
 //        canvas.getGraphics().fillRect((int) rectangle.getX(), (int) rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
     }
 
-    public void moveRectangle(float dx, float dy) {
+    public void moveRectangle(int dx, int dy) {
         rectangle.move(dx, dy);
     }
 
