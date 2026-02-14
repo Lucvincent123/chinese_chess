@@ -8,6 +8,8 @@ public abstract class Piece implements DrawableEntity {
     protected PieceColor color;  // Màu quân cờ (đỏ hoặc đen)
     protected int size;  // Kích thước quân cờ
     protected String name;  // Tên quân cờ
+    protected boolean isSelected = false;  // Trạng thái được chọn
+    protected boolean isCaptured = false;  // Trạng thái bị bắt
 
     // Board position constants
     protected static final int BOARD_X = 50;
@@ -19,6 +21,8 @@ public abstract class Piece implements DrawableEntity {
     public enum PieceColor {
         RED, BLACK
     }
+
+
 
     public Piece(int row, int col, PieceColor color) {
         this.row = row;
@@ -40,6 +44,14 @@ public abstract class Piece implements DrawableEntity {
     public void setPosition(int row, int col) {
         this.row = row;
         this.col = col;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.isSelected = selected;
     }
 
     public PieceColor getColor() {
@@ -83,6 +95,13 @@ public abstract class Piece implements DrawableEntity {
         g2d.setStroke(new BasicStroke(2));
         g2d.drawOval(x - size / 2, y - size / 2, size, size);
 
+        // Vẽ highlight nếu được chọn
+        if (isSelected) {
+            g2d.setColor(new Color(255, 255, 0, 128)); // Vàng bán trong suốt
+            g2d.fillOval(x - size / 2 - 5, y - size / 2 - 5, size + 10, size + 10);
+        }
+
+
         // Vẽ nền sáng bên trong
         g2d.setColor(new Color(255, 200, 200));
         g2d.fillOval(x - size / 2 + 3, y - size / 2 + 3, size - 6, size - 6);
@@ -117,6 +136,10 @@ public abstract class Piece implements DrawableEntity {
         int textY = y - (metrics.getAscent() + metrics.getDescent()) / 2 + metrics.getAscent();
 
         g2d.drawString(text, textX, textY);
+    }
+
+    public void setCaptured(boolean captured) {
+        isCaptured = captured;
     }
 }
 

@@ -15,6 +15,10 @@ public class Board {
     private int borderThickness = 4;
     private int cellSize = 50;
 
+    private Piece selectedPiece = null;
+
+
+
     public Board() {
         initializePieces();
     }
@@ -130,6 +134,57 @@ public class Board {
         int pixelX = boardX + borderThickness / 2 + padding + col * cellSize;
         int pixelY = boardY + borderThickness / 2 + padding + row * cellSize;
         return new int[]{pixelX, pixelY};
+    }
+
+    public int[] screenToBoard(int pixelX, int pixelY) {
+        int col = (pixelX - boardX - borderThickness / 2 - padding) / cellSize;
+        int row = (pixelY - boardY - borderThickness / 2 - padding) / cellSize;
+        if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+            return null; // Out of bounds
+        }
+        return new int[]{row, col};
+    }
+
+    public void clickOnBoard() {
+        if (selectedPiece != null) {
+            // Handle move logic here (validate move, update board state, etc.)
+            selectedPiece.setSelected(false);
+            selectedPiece = null;
+        }
+    }
+
+    public Piece getSelectedPiece() {
+        return selectedPiece;
+    }
+
+    public void setSelectedPiece(Piece piece) {
+        if (selectedPiece != null) {
+            selectedPiece.setSelected(false);
+        }
+        selectedPiece = piece;
+        if (selectedPiece != null) {
+            selectedPiece.setSelected(true);
+        }
+    }
+
+    public boolean isValidMove(Piece piece, int targetRow, int targetCol) {
+        // Implement move validation logic based on piece type and game rules
+        // This is a placeholder and should be expanded with actual rules for each piece
+        return true;
+    }
+
+    public void movePiece(Piece piece, int targetRow, int targetCol) {
+        if (isValidMove(piece, targetRow, targetCol)) {
+            // Move the piece on the board
+            board[piece.getRow()][piece.getCol()] = null; // Remove from old position
+            piece.setPosition(targetRow, targetCol); // Update piece position
+            Piece capturedPiece = board[targetRow][targetCol]; // Check if there's a piece to capture
+            if (capturedPiece != null) {
+                // Handle captured piece (e.g., remove from game, update score, etc.)
+                capturedPiece.setCaptured(true);
+            }
+            board[targetRow][targetCol] = piece; // Place in new position
+        }
     }
 }
 

@@ -8,6 +8,7 @@ import java.awt.Color;
 
 public class Container extends GameContainer {
     private Board board;
+    private Input mouseListener;
 
     public Container(GameWindow window, int targetFPS, int targetUPS) {
         super(window, targetFPS, targetUPS);
@@ -18,6 +19,8 @@ public class Container extends GameContainer {
 
         // Create game board and add all pieces
         this.board = new Board();
+        this.mouseListener = new Input(board);
+        this.window.addMouseListener(mouseListener);
         Piece[] pieces = board.getAllPieces();
         for (Piece piece : pieces) {
             this.window.getCanvas().addEntity(piece);

@@ -26,4 +26,8 @@ public class GameWindow extends JFrame {
 
 
     public GameCanvas getCanvas() { return canvas; }
+
+    public void setTitle(String title) {
+        super.setTitle(title);
+    }
 }

@@ -15,8 +15,12 @@ public class Advisor extends Piece {
 
     @Override
     public void draw(Graphics g) {
-        drawPieceCircle(g, getPixelX(), getPixelY());
-        drawText(g, getPixelX(), getPixelY(), name);
+        if (!this.isCaptured) {
+
+            drawPieceCircle(g, getPixelX(), getPixelY());
+            drawText(g, getPixelX(), getPixelY(), name);
+        }
+
     }
 }
 
