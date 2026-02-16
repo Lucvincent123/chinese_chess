@@ -1,9 +1,7 @@
 package org.example.xiangqi.core;
 
-import java.util.Objects;
-
 public class Cannon extends Piece {
-    public Cannon(TypesOfPiece type) {
+    public Cannon(PieceType type) {
         super(type);
     }
 
@@ -12,9 +10,6 @@ public class Cannon extends Piece {
         if (fromRow != toRow && fromCol != toCol) {
             return false; // Must move in a straight line
         }
-        if (chessBoard[toRow][toCol] != null) {
-            return false; // Cannot move to a square occupied by any piece
-        }
         return countPiecesInPath(chessBoard, fromRow, fromCol, toRow, toCol) == 0; // No pieces in the path
     }
 
@@ -22,9 +17,6 @@ public class Cannon extends Piece {
     boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         if (fromRow != toRow && fromCol != toCol) {
             return false; // Must move in a straight line
-        }
-        if (chessBoard[toRow][toCol] == null || Objects.equals(chessBoard[toRow][toCol].getType().getColor(), this.type.getColor())) {
-            return false; // Must capture an opponent's piece
         }
         return countPiecesInPath(chessBoard, fromRow, fromCol, toRow, toCol) == 1; // Exactly one piece in the path
     }

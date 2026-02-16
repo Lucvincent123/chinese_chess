@@ -1,29 +1,16 @@
 package org.example.xiangqi.core;
 
-public class CapturedPieceLines {
-    public final static int MAX_PIECES = 16;
-    private final Piece[] line = new Piece[MAX_PIECES];
-    private int count = 0;
-    private final boolean isRed;
+public class CapturedPieceLine extends PieceLine{
 
-    public CapturedPieceLines(boolean isRed) {
-        this.isRed = isRed;
-    }
-
-    public void addCapturedPiece(Piece piece) {
-        if (count < MAX_PIECES) {
-            line[count] = piece;
-            count++;
-        } else {
-            throw new IllegalStateException("Cannot capture more than " + MAX_PIECES + " pieces.");
-        }
+    public CapturedPieceLine(boolean isRed) {
+        super(isRed);
     }
 
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
         string.append("#".repeat(MAX_PIECES * 3 / 2 + 2)).append("\n");
-        String title = " Captured pieces: " + (isRed ? "Red" : "Black");
+        String title = " Captured pieces: " + (isRed ? PieceColor.RED : PieceColor.BLACK);
         string.append("#").append(title);
         string.append(" ".repeat(Math.max(0, MAX_PIECES * 3 / 2 - title.length()))).append("#\n");
 

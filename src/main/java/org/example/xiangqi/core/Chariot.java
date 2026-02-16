@@ -1,9 +1,7 @@
 package org.example.xiangqi.core;
 
-import java.util.Objects;
-
 public class Chariot extends Piece{
-    public Chariot(TypesOfPiece type) {
+    public Chariot(PieceType type) {
         super(type);
     }
 
@@ -32,6 +30,6 @@ public class Chariot extends Piece{
 
     @Override
     boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
-        return canMove(chessBoard, fromRow, fromCol, toRow, toCol) && !Objects.equals(chessBoard[toRow][toCol].getType().getColor(), this.type.getColor());
+        return canMove(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 }

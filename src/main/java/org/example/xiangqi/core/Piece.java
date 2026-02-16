@@ -1,23 +1,18 @@
 package org.example.xiangqi.core;
 
-public class Piece {
-    protected final TypesOfPiece type;
+abstract public class Piece {
+    protected final PieceType type;
 
-    public Piece(TypesOfPiece type) {
+    public Piece(PieceType type) {
         this.type = type;
     }
 
-    public TypesOfPiece getType() {
+    public PieceType getType() {
         return type;
     }
 
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
-        return false;
-    }
+    abstract boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
 
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
-        return false;
-    }
-
+    abstract boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
 
 }
