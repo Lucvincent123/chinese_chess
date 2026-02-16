@@ -13,7 +13,7 @@ public class Container extends GameContainer {
     public Container(GameWindow window, int targetFPS, int targetUPS) {
         super(window, targetFPS, targetUPS);
 
-        // Create chess board
+        // Create xiangqi board
         ChessBoard chessBoard = new ChessBoard(50, 50, Color.ORANGE, Color.BLACK, Color.BLACK);
         this.window.getCanvas().addEntity(chessBoard);
 
