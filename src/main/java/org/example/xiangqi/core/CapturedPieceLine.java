@@ -1,6 +1,6 @@
 package org.example.xiangqi.core;
 
-public class CapturedPieceLine extends PieceLine{
+public class CapturedPieceLine extends PieceLine {
 
     public CapturedPieceLine(boolean isRed) {
         super(isRed);
@@ -8,32 +8,49 @@ public class CapturedPieceLine extends PieceLine{
 
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("#".repeat(MAX_PIECES * 3 / 2 + 2)).append("\n");
-        String title = " Captured pieces: " + (isRed ? PieceColor.RED : PieceColor.BLACK);
-        string.append("#").append(title);
-        string.append(" ".repeat(Math.max(0, MAX_PIECES * 3 / 2 - title.length()))).append("#\n");
+        int borderWidth = MAX_PIECES * 3 / 2 + 2;
 
-        string.append("#").append("-".repeat(MAX_PIECES * 3 / 2)).append("#\n");
-        string.append("#");
-        for (int i = 0; i < MAX_PIECES / 2; i++) {
+        return buildBorder(borderWidth) +
+                buildHeader() +
+                buildSeparator() +
+                buildFirstRow() +
+                buildSecondRow() +
+                buildBorder(borderWidth);
+    }
+
+    private String buildBorder(int width) {
+        return "#".repeat(width) + "\n";
+    }
+
+    private String buildHeader() {
+        String title = " Captured pieces: " + (isRed ? PieceColor.RED : PieceColor.BLACK);
+        return "#" + title +
+                " ".repeat(Math.max(0, MAX_PIECES * 3 / 2 - title.length())) +
+                "#\n";
+    }
+
+    private String buildSeparator() {
+        return "#" + "-".repeat(MAX_PIECES * 3 / 2) + "#\n";
+    }
+
+    private String buildFirstRow() {
+        return buildPieceRow(0, MAX_PIECES / 2);
+    }
+
+    private String buildSecondRow() {
+        return buildPieceRow(MAX_PIECES / 2, MAX_PIECES);
+    }
+
+    private String buildPieceRow(int start, int end) {
+        StringBuilder row = new StringBuilder("#");
+        for (int i = start; i < end; i++) {
             if (line[i] != null) {
-                string.append(line[i].getType().getSymbol()).append(" ");
+                row.append(line[i].getType().getSymbol()).append(" ");
             } else {
-                string.append(" - ");
+                row.append(" - ");
             }
         }
-        string.append("#\n");
-        string.append("#");
-        for (int i = MAX_PIECES / 2; i < MAX_PIECES; i++) {
-            if (line[i] != null) {
-                string.append(line[i].getType().getSymbol()).append(" ");
-            } else {
-                string.append(" - ");
-            }
-        }
-        string.append("#\n");
-        string.append("#".repeat(MAX_PIECES * 3 / 2 + 2)).append("\n");
-        return string.toString();
+        row.append("#\n");
+        return row.toString();
     }
 }

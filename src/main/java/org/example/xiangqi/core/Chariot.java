@@ -1,35 +1,50 @@
 package org.example.xiangqi.core;
 
-public class Chariot extends Piece{
+public class Chariot extends Piece {
     public Chariot(PieceType type) {
         super(type);
     }
 
     @Override
     boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
-        if (fromRow != toRow && fromCol != toCol) {
-            return false; // Must move in a straight line
-        }
-        if (fromRow == toRow) { // Moving horizontally
-            int step = (toCol - fromCol) > 0 ? 1 : -1;
-            for (int col = fromCol + step; col != toCol; col += step) {
-                if (chessBoard[fromRow][col] != null) {
-                    return false; // Path is blocked
-                }
-            }
-        } else { // Moving vertically
-            int step = (toRow - fromRow) > 0 ? 1 : -1;
-            for (int row = fromRow + step; row != toRow; row += step) {
-                if (chessBoard[row][fromCol] != null) {
-                    return false; // Path is blocked
-                }
-            }
-        }
-        return true;
+        return isStraightLine(fromRow, fromCol, toRow, toCol) &&
+               !isPathBlocked(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 
     @Override
     boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return canMove(chessBoard, fromRow, fromCol, toRow, toCol);
+    }
+
+    private boolean isStraightLine(int fromRow, int fromCol, int toRow, int toCol) {
+        return fromRow == toRow || fromCol == toCol;
+    }
+
+    private boolean isPathBlocked(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+        if (fromRow == toRow) {
+            return isHorizontalPathBlocked(chessBoard, fromRow, fromCol, toCol);
+        } else {
+            return isVerticalPathBlocked(chessBoard, fromRow, toRow, fromCol);
+        }
+    }
+
+    private boolean isHorizontalPathBlocked(Piece[][] chessBoard, int row, int fromCol, int toCol) {
+        int step = (toCol - fromCol) > 0 ? 1 : -1;
+        for (int col = fromCol + step; col != toCol; col += step) {
+            if (chessBoard[row][col] != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isVerticalPathBlocked(Piece[][] chessBoard, int fromRow, int toRow, int col) {
+        int step = (toRow - fromRow) > 0 ? 1 : -1;
+        for (int row = fromRow + step; row != toRow; row += step) {
+            if (chessBoard[row][col] != null) {
+                return true;
+            }
+        }
+        return false;
     }
 }

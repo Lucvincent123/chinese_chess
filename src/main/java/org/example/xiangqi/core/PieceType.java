@@ -21,7 +21,7 @@ public enum PieceType {
     private final PieceName name;
     private final char symbol;
 
-    private PieceType(PieceColor color, PieceName name) {
+    PieceType(PieceColor color, PieceName name) {
         this.name = name;
         this.color = color;
         this.symbol = getSymbolByNameAndColor(name, color);
