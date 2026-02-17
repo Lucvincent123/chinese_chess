@@ -1,9 +1,10 @@
 package org.example.xiangqi;
 
 import org.example.xiangqi.core.*;
+import org.example.xiangqi.gui.v1.*;
 
 public class Main {
     public static void main(String[] args) {
-        new ChessCLI();
+        new ChessGuiV1();
     }
 }
