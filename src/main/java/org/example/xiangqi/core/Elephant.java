@@ -9,13 +9,13 @@ public class Elephant extends Piece {
     }
 
     @Override
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return canCrossRiver(toRow) && isDiagonalMove(fromRow, fromCol, toRow, toCol) &&
                isMiddlePointEmpty(chessBoard, fromRow, toRow, fromCol, toCol);
     }
 
     @Override
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return canMove(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 

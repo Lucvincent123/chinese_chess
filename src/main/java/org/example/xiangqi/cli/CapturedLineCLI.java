@@ -1,8 +1,10 @@
-package org.example.xiangqi.core;
+package org.example.xiangqi.cli;
 
-public class CapturedPieceLine extends PieceLine {
+import org.example.xiangqi.core.CapturedLine;
+import org.example.xiangqi.core.PieceColor;
 
-    public CapturedPieceLine(boolean isRed) {
+public class CapturedLineCLI extends CapturedLine {
+    public CapturedLineCLI(boolean isRed) {
         super(isRed);
     }
 

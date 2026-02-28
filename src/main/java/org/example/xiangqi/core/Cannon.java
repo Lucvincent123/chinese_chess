@@ -6,13 +6,13 @@ public class Cannon extends Piece {
     }
 
     @Override
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return isStraightLine(fromRow, fromCol, toRow, toCol) &&
                countPiecesInPath(chessBoard, fromRow, fromCol, toRow, toCol) == 0;
     }
 
     @Override
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return isStraightLine(fromRow, fromCol, toRow, toCol) &&
                countPiecesInPath(chessBoard, fromRow, fromCol, toRow, toCol) == 1;
     }

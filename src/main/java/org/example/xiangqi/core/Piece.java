@@ -11,8 +11,12 @@ abstract public class Piece {
         return type;
     }
 
-    abstract boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
+    public PieceName getName() { return type.getName(); }
 
-    abstract boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
+    public PieceColor getColor() { return type.getColor(); }
+
+    public abstract boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
+
+    public abstract boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol);
 
 }

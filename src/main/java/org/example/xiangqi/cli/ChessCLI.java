@@ -1,15 +1,15 @@
-package org.example.xiangqi.core;
+package org.example.xiangqi.cli;
 
 import java.util.Scanner;
 
 public class ChessCLI {
     public ChessCLI() {
         Scanner scanner = new Scanner(System.in);
-        ChessBoard chessBoard = new ChessBoard();
-        chessBoard.initializePieces();
+        ChessGameCLI chessGame = new ChessGameCLI(new BoardCLI(), new CapturedLineCLI(true), new CapturedLineCLI(false));
+        chessGame.initialize();
         boolean running = true;
         while (running) {
-            System.out.println(chessBoard);
+            System.out.println(chessGame);
             System.out.print("Enter move (e.g., 'move 0 0 0 1' to move piece from (0,0) to (0,1), or 'exit' to quit): ");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("exit")) {
@@ -22,7 +22,7 @@ public class ChessCLI {
                         int fromCol = Integer.parseInt(parts[2]);
                         int toRow = Integer.parseInt(parts[3]);
                         int toCol = Integer.parseInt(parts[4]);
-                        if (chessBoard.movePiece(fromRow, fromCol, toRow, toCol)) {
+                        if (chessGame.movePiece(fromRow, fromCol, toRow, toCol)) {
                             System.out.println("Move successful!");
                         } else {
                             System.out.println("Invalid move. Try again.");

@@ -6,7 +6,7 @@ public class General extends Piece {
     }
 
     @Override
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         if (type == PieceType.RED_GENERAL) {
             if (toRow > 2 || toCol < 3 || toCol > 5) {
                 return false; // Red general must stay in the palace
@@ -20,7 +20,7 @@ public class General extends Piece {
     }
 
     @Override
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return isFacingGeneral(chessBoard, fromRow, fromCol, toRow, toCol) || canMove(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 

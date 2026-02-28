@@ -6,7 +6,7 @@ public class Horse extends Piece {
     }
 
     @Override
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         int rowDiff = Math.abs(toRow - fromRow);
         int colDiff = Math.abs(toCol - fromCol);
 
@@ -18,7 +18,7 @@ public class Horse extends Piece {
     }
 
     @Override
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return canMove(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 

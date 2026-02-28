@@ -9,7 +9,7 @@ public class Soldier extends Piece {
     }
 
     @Override
-    boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canMove(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         if (type == PieceType.RED_SOLDIER) {
             return canMoveRedSoldier(fromRow, fromCol, toRow, toCol);
         } else {
@@ -18,7 +18,7 @@ public class Soldier extends Piece {
     }
 
     @Override
-    boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
+    public boolean canCapture(Piece[][] chessBoard, int fromRow, int fromCol, int toRow, int toCol) {
         return canMove(chessBoard, fromRow, fromCol, toRow, toCol);
     }
 
